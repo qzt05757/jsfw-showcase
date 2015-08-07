@@ -10,12 +10,12 @@ function Persons() {
 		return this.inputFirstName() + " " + this.inputLastName();
 	}, this);
 	this.persons = ko.observableArray([]);
-	this.addPerson = function(p) {
+	this.addPerson = function(firstName, lastName) {
+		var p = { firstName: firstName, lastName: lastName};
 		this.persons.push(p);
 	}
 	this.create = function() {
-		var p = new Person(this.inputFirstName(), this.inputLastName());
-		this.addPerson(p);
+		this.addPerson(this.inputFirstName(), this.inputLastName());
 	}
 };
 
@@ -25,7 +25,7 @@ var init = function() {
 	$.getJSON("api/persons", function(ps) {
 		for(var i = 0; i<ps.length; ++i) {
 			var p = ps[i];
-			persons.addPerson(new Person(p.firstName, p.lastName));
+			persons.addPerson(p.firstName, p.lastName);
 		}
 	});
 };

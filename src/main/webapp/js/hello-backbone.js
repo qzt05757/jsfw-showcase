@@ -1,8 +1,3 @@
-function Person(first, last) {
-    this.firstName = first;
-    this.lastName =  last;
-};
-
 var InputModel = Backbone.Model.extend({});
 
 var inputModel = new InputModel({
@@ -34,8 +29,8 @@ var InputView = Backbone.View.extend({
     },
     createPerson: function() {
         this.updateModel();
-        var p = new Person(this.model.get('firstName'), this.model.get('lastName'));
-        personsModel.add(p);        
+        var p = { firstName: this.model.get('firstName'), lastName: this.model.get('lastName') };
+        personsModel.add(p); 
     },
 });
 var inputView = new InputView({
@@ -49,7 +44,7 @@ var PersonsModel = Backbone.Collection.extend({
         var ret = [];
         for(var i = 0; i < jsons.length; ++i) {
 		    var json = jsons[i];
-		    var p = new Person(json.firstName, json.lastName);
+		    var p = {firstName: json.firstName, lastName: json.lastName};
 		    ret.push(p);
         }
 		return ret;

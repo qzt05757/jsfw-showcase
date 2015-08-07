@@ -1,8 +1,3 @@
-function Person(first, last) {
-    this.firstName = first;
-    this.lastName =  last;
-};
-
 var InputArea = React.createClass({
 	getInitialState: function() {
 		return {
@@ -35,7 +30,6 @@ var InputArea = React.createClass({
 });
 
 var PersonsArea = React.createClass({
-	
 	getInitialState: function() {
 		return {
 			persons: []
@@ -47,13 +41,13 @@ var PersonsArea = React.createClass({
 		$.getJSON('api/persons', function(jsons) {
 			for(var i = 0; i < jsons.length; ++i) {
 				var json = jsons[i];
-				self.addPerson(json.firstName, json.lastName);				
+				self.addPerson(json.firstName, json.lastName);			
 			}
 		});
 	},
 	
 	addPerson: function(firstName, lastName) {
-		var p = new Person(firstName, lastName);
+		var p = {firstName: firstName, lastName: lastName};
 		var ps = this.state.persons;
 		ps.push(p);
 		this.setState({persons: ps});		
@@ -68,7 +62,7 @@ var PersonsArea = React.createClass({
 
 		return <div>
 		         <InputArea addPerson={this.addPerson}/>
-                 <div id="persons-panel">
+                 <div id="persons-panel" className="container">
   		           <table className="table table-striped table-bordered">
 	                 <thead>
 	                   <tr><th>FirstName</th><th>LastName</th></tr>
