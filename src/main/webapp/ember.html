@@ -10,9 +10,28 @@
     <link rel="stylesheet" href="css/external/bootstrap-3.3.5.css"/>
   </head>
   <body>
-    <script type="text/x-handlebars">
-      <h1>Hello World</h1>
-      <p>Hello, {{name}}</p>
+    <script type="text/x-handlebars" data-template-name="hello">
+      <div class="panel panel-default">
+        <div id="input-panel" class="panel-body">
+          <p>FirstName: {{input value=inputFirstName class="form-control"}}</p>
+          <p>LastName:  {{input value=inputLastName class="form-control"}}</p>
+          <p>FullName: {{inputFullName}}</p>
+          <button id="create" class="btn" {{action 'create'}}>create</button>
+        </div>
+      </div>
+
+      <div id="persons-panel" class="container">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>FirstName</th><th>LastName</th></tr>
+          </thead>
+          <tbody>
+{{#each model.persons as |p|}}
+            <tr><td>{{p.firstName}}</td><td>{{p.lastName}}</td></tr>
+{{/each}}
+          </tbody>
+        </table>
+      </div>
     </script>
 
     <script type="text/javascript" src="js/external/handlebars-v3.0.3.js"></script>
